@@ -5,27 +5,24 @@ const connectDB = require("./config/db");
 const path = require("path");
 require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
 const colors = require("colors");
+const userRoutes = require("./routes/userRoutes");
+const { notFound, errorHandler } = require("./middlewares/errorMiddleware");
 
+dotenv.config();
 const app = express();
 connectDB();
-dotenv.config();
+
+app.use(express.json()); // to accept JSON data
 
 app.get("/", (req, res) => {
     res.send("API is running successfully");
 });
 
-app.get("/api/chat", (req, res) => {
-    res.send(chats);
-});
+app.use("/api/user", userRoutes);
 
-app.get("/api/chat/:id", (req, res) => {
-    const singleChat = chats.find((c) => c._id === req.params.id);
-    res.send(singleChat);
-});
+app.use(notFound);
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 4000;
 
-app.listen(
-    4000,
-    console.log(`Server started on port ${PORT}`.yellow.bold)
-);
+app.listen(4000, console.log(`Server started on port ${PORT}`.yellow.bold));
