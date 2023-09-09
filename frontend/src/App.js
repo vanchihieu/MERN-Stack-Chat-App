@@ -1,12 +1,15 @@
-import { Route } from "react-router-dom/cjs/react-router-dom.min";
+import { Routes, Route } from "react-router-dom";
+
 import "./App.css";
 import HomePage from "./Pages/HomePage";
 import ChatPage from "./Pages/ChatPage";
 function App() {
     return (
         <div className="App">
-            <Route path="/" component={HomePage} exact></Route>
-            <Route path="/chats" component={ChatPage}></Route>
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/chats" element={<ChatPage />} />
+            </Routes>
         </div>
     );
 }

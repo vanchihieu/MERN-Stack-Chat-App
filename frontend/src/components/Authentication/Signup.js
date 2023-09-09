@@ -6,13 +6,13 @@ import { VStack } from "@chakra-ui/layout";
 import { useState } from "react";
 import { useToast } from "@chakra-ui/react";
 import axios from "axios";
-import { useHistory } from "react-router";
+import { useNavigate } from 'react-router-dom';
 
 export default function Signup() {
     const [show, setShow] = useState(false);
     const handleClick = () => setShow(!show);
     const toast = useToast();
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const [name, setName] = useState();
     const [email, setEmail] = useState();
@@ -71,7 +71,7 @@ export default function Signup() {
             });
             localStorage.setItem("userInfo", JSON.stringify(data));
             setPicLoading(false);
-            history.push("/chats");
+            navigate("/chats");
         } catch (error) {
             toast({
                 title: "Error Occured!",
