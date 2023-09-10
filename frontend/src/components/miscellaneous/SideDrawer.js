@@ -111,7 +111,7 @@ function SideDrawer() {
 
             if (!chats.find((c) => c._id === data._id))
                 setChats([data, ...chats]);
-            setSelectedChat(data);
+            setSelectedChat(data); // context
             setLoadingChat(false);
             onClose();
         } catch (error) {
@@ -236,7 +236,7 @@ function SideDrawer() {
                                 />
                             ))
                         )}
-                        {loadingChat && <Spinner ml="auto" d="flex" />}
+                        {loadingChat && <Spinner ml="auto" display="flex" />}
                     </DrawerBody>
                 </DrawerContent>
             </Drawer>
